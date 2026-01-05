@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Para Natalia ✨</title>
+
+  <style>
+    :root{
+      --bg1:#04040d;
+      --bg2:#070a22;
+      --ink: rgba(255,255,255,.94);
+      --ink2: rgba(255,255,255,.78);
+      --edge: rgba(255,255,255,.12);
+      --glass: rgba(0,0,0,.30);
+      --glow: rgba(140,200,255,.35);
+      --btn1: rgba(255,255,255,.18);
+      --btn2: rgba(255,255,255,.10);
+    }
+
+    *{ box-sizing:border-box }
+    html,body{ height:100%; margin:0 }
+
+    body{
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background: radial-gradient(900px 900px at 50% 30%, #0c144a 0%, var(--bg2) 38%, var(--bg1) 78%);
+      overflow:hidden;
+      color:var(--ink);
+    }
+
+    canvas{ position:fixed; inset:0; width:100%; height:100% }
+
+    /* Brillo suave tipo cielo nocturno */
+    .glow{
+      position:fixed; inset:-25%;
+      background:
+        radial-gradient(520px 520px at 30% 65%, rgba(140,200,255,.16) 0%, transparent 60%),
+        radial-gradient(640px 640px at 70% 35%, rgba(255,255,255,.10) 0%, transparent 55%),
+        radial-gradient(900px 900px at 50% 85%, rgba(140,200,255,.10) 0%, transparent 60%);
+      filter: blur(18px);
+      animation: drift 8s ease-in-out infinite alternate;
+      pointer-events:none;
+    }
+
+    @keyframes drift{
+      from{ transform: translate(-1%, -1%) scale(1.02); opacity:.85 }
+      to{ transform: translate(1%, 1%) scale(1.06); opacity:1 }
+    }
+
+    /* Latido luminoso */
+    .beat{
+      position:fixed; inset:0;
+      background: radial-gradient(800px 800px at 50% 40%, rgba(120,170,255,.10) 0%, transparent 60%);
+      opacity:.6;
+      animation: beat 1.6s ease-in-out infinite;
+      pointer-events:none;
+      mix-blend-mode: screen;
+    }
+
+    @keyframes beat{
+      0%,100%{ transform: scale(1); opacity:.45 }
+      50%{ transform: scale(1.03); opacity:.70 }
+    }
+
+    .wrap{
+      position:fixed; inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
+    }
+
+    .card{
+      width: min(420px, 92vw);
+      padding: 26px 20px;
+      border-radius: 24px;
+      background: var(--glass);
+      border: 1px solid var(--edge);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 22px 70px rgba(0,0,0,.55);
+      text-align:center;
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size: clamp(26px, 7vw, 34px);
+      font-weight:750;
+      letter-spacing:.2px;
+      text-shadow:0 0 18px rgba(140,200,255,.18);
+    }
+
+    .spark{
+      margin-left:6px;
+      display:inline-block;
+      animation: pulse 1.4s ease-in-out infinite;
+      filter: drop-shadow(0 0 10px rgba(160,210,255,.35));
+    }
+
+    @keyframes pulse{
+      0%,100%{ transform:scale(1); opacity:.85 }
+      50%{ transform:scale(1.18); opacity:1 }
+    }
+
+    p{
+      margin:12px 0;
+      font-size: clamp(15px, 4.3vw, 18px);
+      line-height:1.7;
+      color:var(--ink2);
+    }
+
+    .em{
+      font-weight:750;
+      color:var(--ink);
+      font-size: clamp(16px, 4.6vw, 19px);
+      text-shadow:0 0 16px rgba(140,200,255,.20);
+    }
+
+    .btn{
+      margin-top:16px;
+      width:100%;
+      padding:14px;
+      font-size:15px;
+      font-weight:700;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.18);
+      background: linear-gradient(180deg, var(--btn1), var(--btn2));
+      color:var(--ink);
+      cursor:pointer;
+      box-shadow:0 10px 30px rgba(0,0,0,.25);
+    }
+
+    .reveal{
+      margin-top:14px;
+      padding:14px;
+      border-radius:16px;
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.14);
+      font-weight:750;
+      font-size: clamp(15px, 4.3vw, 18px);
+      opacity:0;
+      max-height:0;
+      overflow:hidden;
+      transform: translateY(8px);
+      transition: opacity .45s ease, transform .45s ease, max-height .55s ease;
+    }
+
+    .reveal.show{
+      opacity:1;
+      max-height:200px;
+      transform: translateY(0);
+    }
+
+    .sig{
+      margin-top:14px;
+      font-size:14px;
+      color: rgba(255,255,255,.70);
+    }
+
+    .hint{
+      margin-top:10px;
+      font-size:12.5px;
+      color: rgba(255,255,255,.45);
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="stars"></canvas>
+  <div class="beat"></div>
+  <div class="glow"></div>
+
+  <div class="wrap">
+    <div class="card">
+      <h1>Natalia<span class="spark">✨</span></h1>
+
+      <p class="em">Eres mi imperio romano y la dueña de mis pensamientos.</p>
+
+      <p>
+        A veces el mundo corre, pero cuando pienso en ti,
+        todo se ordena: como un cielo lleno de estrellas…
+        y una sola que lo cambia todo.
+      </p>
+
+      <p class="em">Mi mejor día es cualquiera que sea contigo.</p>
+
+      <button class="btn" id="btn">¿Te puedo hacer una pregunta?</button>
+
+      <div class="reveal" id="reveal">
+        ¿Te gustaría ir a comer
+        <span style="text-shadow:0 0 14px rgba(140,200,255,.25)">mazorcada</span>
+        después del trabajo?
+      </div>
+
+      <div class="sig">— David Yesid</div>
+      <div class="hint">(Tócalo cuando tengas un minuto 😊)</div>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("stars");
+    const ctx = canvas.getContext("2d");
+    const DPR = Math.min(2, window.devicePixelRatio || 1);
+
+    let W, H, stars, t=0;
+
+    function resize(){
+      W = Math.floor(innerWidth * DPR);
+      H = Math.floor(innerHeight * DPR);
+      canvas.width = W;
+      canvas.height = H;
+      canvas.style.width = innerWidth+"px";
+      canvas.style.height = innerHeight+"px";
+
+      const count = Math.floor((W*H)/(DPR*DPR)/11000);
+      stars = Array.from({length:count},()=>({
+        x:Math.random()*W,
+        y:Math.random()*H,
+        r:Math.random()*1.3+0.3,
+        a:Math.random()*0.7+0.15,
+        tw:Math.random()*0.8+0.2,
+        sp:(Math.random()*0.1+0.03)*DPR
+      }));
+    }
+
+    function draw(){
+      t+=0.012;
+      ctx.clearRect(0,0,W,H);
+
+      for(const s of stars){
+        s.x+=s.sp; s.y+=s.sp*0.55;
+        if(s.x>W) s.x=0;
+        if(s.y>H) s.y=0;
+        const tw=0.5+0.5*Math.sin(t*s.tw+s.x*0.01);
+        ctx.beginPath();
+        ctx.fillStyle=`rgba(255,255,255,${s.a*tw})`;
+        ctx.arc(s.x,s.y,s.r*DPR,0,Math.PI*2);
+        ctx.fill();
+      }
+      requestAnimationFrame(draw);
+    }
+
+    resize(); draw();
+    addEventListener("resize", resize);
+
+    const btn=document.getElementById("btn");
+    const reveal=document.getElementById("reveal");
+    let open=false;
+
+    btn.onclick=()=>{
+      open=!open;
+      reveal.classList.toggle("show",open);
+      btn.textContent=open?"Gracias por leerla ✨":"¿Te puedo hacer una pregunta?";
+      if(navigator.vibrate) navigator.vibrate(18);
+    };
+  </script>
+</body>
+</html>
